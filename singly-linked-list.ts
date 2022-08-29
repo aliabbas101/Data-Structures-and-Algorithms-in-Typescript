@@ -57,13 +57,14 @@ export class LinkedList {
         return nodeToInsert;
     }
 
-    public delete(n: number) {
+    public delete(n: number){
 
         let currentNode: Node | null | undefined = this.head;
 
         if(n == 1){
             this.head = currentNode?.next;
             currentNode = null;
+            return;
         }
 
         for(let i=0; i < n-2; i++){

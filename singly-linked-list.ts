@@ -24,7 +24,7 @@ export class LinkedList {
 
     }
 
-    insert(data: any, n: number) : Node {
+    public insert(data: any, n: number) : Node {
         
         let nodeToInsert : Node | null | undefined = new Node();
         nodeToInsert.data = data;
@@ -55,6 +55,22 @@ export class LinkedList {
         }
 
         return nodeToInsert;
+    }
+
+    public reverse(): Node {
+        let currentNode: Node | null | undefined = this.head;
+        let previousNode: Node | null | undefined = null;
+        let nextNode: Node | null | undefined
+
+        while(currentNode != null){
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        this.head = previousNode;
+        return this.head;
     }
 
     public delete(n: number){
@@ -91,16 +107,14 @@ export class LinkedList {
         }
     }
 
-
 }
-
 
 let list: LinkedList = new LinkedList();
 list.insert({name:"Ali"}, 1)
 list.insert({name:"John"}, 2)
 list.insert({name:"Micheal"}, 3)
 list.insert({name:"Sarah"}, 4)
-list.delete(1);
-list.delete(1);
+list.printList();
+list.reverse();
 list.printList();
 

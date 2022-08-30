@@ -5,7 +5,7 @@ export class Node {
 
 export class LinkedList {
 
-    private head: Node | null | undefined = null;
+    public head: Node | null | undefined = null;
 
     public insertAtBeginning(data: any): Node {
         
@@ -21,6 +21,27 @@ export class LinkedList {
         this.head = temp;
         
         return temp;
+
+    }
+
+    public insertAtEnd(data: any){
+        
+        let currentNode: Node = this.head;
+
+        if(this.head == null){
+            this.head = currentNode;
+            return;
+        }
+
+        while(currentNode != null){
+            currentNode = currentNode.next;
+        }
+
+        let newNode: Node = new Node();
+        newNode.data = data;
+        newNode.next = null;
+
+        currentNode.next = newNode;
 
     }
 
@@ -73,6 +94,21 @@ export class LinkedList {
         return this.head;
     }
 
+
+    public reverseRecursive(currentNode: Node): Node {
+
+        if(currentNode.next == null) {
+            this.head = currentNode; 
+            return;
+        }
+
+        this.reverseRecursive(currentNode.next);
+        let nextNode : Node = currentNode.next;
+        nextNode.next = currentNode;
+        currentNode.next = null;
+    }
+
+
     public delete(n: number){
 
         let currentNode: Node | null | undefined = this.head;
@@ -107,14 +143,23 @@ export class LinkedList {
         }
     }
 
+    public printRecursive(node: Node){
+        if(node == null) return;
+        this.printRecursive(node.next);
+        console.log(node.data);
+    }
+
+
 }
 
 let list: LinkedList = new LinkedList();
-list.insert({name:"Ali"}, 1)
-list.insert({name:"John"}, 2)
-list.insert({name:"Micheal"}, 3)
-list.insert({name:"Sarah"}, 4)
-list.printList();
-list.reverse();
-list.printList();
+list.insert({name:"Ali"},1);
+list.insert({name:"John"},2);
+list.insert({name:"Micheal"},3);
+list.insert({name:"Sarah"},4);
+
+list.printList()
+
+list.reverseRecursive(list.head);
+list.printList()
 

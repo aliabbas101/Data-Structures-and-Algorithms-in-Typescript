@@ -3,7 +3,7 @@ export class Node {
     public next: Node | null | undefined;
 }
 
-export class LinkedList {
+export class SinglyLinkedList {
 
     public head: Node | null | undefined = null;
 
@@ -26,21 +26,21 @@ export class LinkedList {
 
     public insertAtEnd(data: any){
         
-        let currentNode: Node = this.head;
-
-        if(this.head == null){
-            this.head = currentNode;
-            return;
-        }
-
-        while(currentNode != null){
-            currentNode = currentNode.next;
-        }
-
         let newNode: Node = new Node();
         newNode.data = data;
         newNode.next = null;
 
+        let currentNode: Node = this.head;
+
+        if(this.head == null){
+            this.head = newNode;
+            return;
+        }
+
+        while(currentNode.next != null){
+            currentNode = currentNode.next;
+        }
+        
         currentNode.next = newNode;
 
     }
@@ -152,11 +152,11 @@ export class LinkedList {
 
 }
 
-let list: LinkedList = new LinkedList();
-list.insert({name:"Ali"},1);
-list.insert({name:"John"},2);
-list.insert({name:"Micheal"},3);
-list.insert({name:"Sarah"},4);
+let list: SinglyLinkedList = new SinglyLinkedList();
+list.insertAtEnd({name:"Ali"});
+list.insertAtEnd({name:"John"});
+list.insertAtEnd({name:"Micheal"});
+list.insertAtEnd({name:"Sarah"});
 
 list.printList()
 

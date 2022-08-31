@@ -99,7 +99,29 @@ export class DoublyLinkedList {
      * @param index 
      */
     public delete(index: number) {
+        if(index == 0){
+            this.deleteFromBeginning();
+            return;
+        }
+
+        let currentNode : Node | null = this.head;
         
+        for(let i=0; i < index ; i++){
+            currentNode = currentNode.next;
+        }
+
+        let previousNode : Node | null = currentNode.prev;
+        let nextNode : Node | null = currentNode.next;
+
+        if(previousNode){
+            previousNode.next = nextNode;
+        }
+
+        if(nextNode){
+            nextNode.prev = previousNode;
+        }
+        currentNode = null;
+
     }
 
 
@@ -141,8 +163,7 @@ list.insert(1, 0);
 list.insert(2, 1);
 list.insert(3, 2);
 list.insert(4, 3);
-list.deleteFromBeginning()
-list.deleteFromBeginning()
+list.delete(2);
 
 
 /** Verifying whether all nodes have their prev and next links intact by printing list in forward and reverse */

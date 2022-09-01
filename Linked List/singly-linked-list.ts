@@ -1,16 +1,16 @@
-export class Node {
-    public data: any;
-    public next: Node | null | undefined;
+export class Node<T> {
+    public data: T;
+    public next: Node<T> | null | undefined;
 }
 
-export class SinglyLinkedList {
+export class SinglyLinkedList<T> {
 
-    public head: Node | null | undefined = null;
+    public head: Node<T> | null | undefined = null;
 
-    public insertAtBeginning(data: any): Node {
+    public insertAtBeginning(data: T): Node<T> {
         
         /** Creating a new temporary node */
-        let temp: Node = new Node();
+        let temp: Node<T> = new Node();
         
         temp.data = data;
 
@@ -24,13 +24,13 @@ export class SinglyLinkedList {
 
     }
 
-    public insertAtEnd(data: any){
+    public insertAtEnd(data: T){
         
-        let newNode: Node = new Node();
+        let newNode: Node<T> = new Node();
         newNode.data = data;
         newNode.next = null;
 
-        let currentNode: Node = this.head;
+        let currentNode: Node<T> = this.head;
 
         if(this.head == null){
             this.head = newNode;
@@ -45,9 +45,9 @@ export class SinglyLinkedList {
 
     }
 
-    public insert(data: any, n: number) : Node {
+    public insert(data: T, n: number) : Node<T> {
         
-        let nodeToInsert : Node | null | undefined = new Node();
+        let nodeToInsert : Node<T> | null | undefined = new Node();
         nodeToInsert.data = data;
         nodeToInsert.next = null;
 
@@ -61,7 +61,7 @@ export class SinglyLinkedList {
         /** When node needs to be inserted at a specific index */
         
         /** We need to get the refernece of the head pointer first */
-        let currentNode: Node | null | undefined = this.head;
+        let currentNode: Node<T> | null | undefined = this.head;
 
         /** Running the loop N-2 times as we need to skip head node reference and last null node reference */
         for(let i=0; i < n-2; i++){
@@ -78,10 +78,10 @@ export class SinglyLinkedList {
         return nodeToInsert;
     }
 
-    public reverse(): Node {
-        let currentNode: Node | null | undefined = this.head;
-        let previousNode: Node | null | undefined = null;
-        let nextNode: Node | null | undefined
+    public reverse(): Node<T> {
+        let currentNode: Node<T> | null | undefined = this.head;
+        let previousNode: Node<T> | null | undefined = null;
+        let nextNode: Node<T> | null | undefined
 
         while(currentNode != null){
             nextNode = currentNode.next;
@@ -95,7 +95,7 @@ export class SinglyLinkedList {
     }
 
 
-    public reverseRecursive(currentNode: Node): Node {
+    public reverseRecursive(currentNode: Node<T>): Node<T> {
 
         if(currentNode.next == null) {
             this.head = currentNode; 
@@ -103,7 +103,7 @@ export class SinglyLinkedList {
         }
 
         this.reverseRecursive(currentNode.next);
-        let nextNode : Node = currentNode.next;
+        let nextNode : Node<T> = currentNode.next;
         nextNode.next = currentNode;
         currentNode.next = null;
     }
@@ -111,7 +111,7 @@ export class SinglyLinkedList {
 
     public delete(n: number){
 
-        let currentNode: Node | null | undefined = this.head;
+        let currentNode: Node<T> | null | undefined = this.head;
 
         if(n == 1){
             this.head = currentNode?.next;
@@ -126,7 +126,7 @@ export class SinglyLinkedList {
         }
 
         if(currentNode){
-            let temp: Node | null | undefined = currentNode.next;
+            let temp: Node<T> | null | undefined = currentNode.next;
             currentNode.next = temp?.next;
             temp = null;
         }
@@ -135,7 +135,7 @@ export class SinglyLinkedList {
 
     public printList(){
         
-        let temp: Node | null | undefined = this.head;
+        let temp: Node<T> | null | undefined = this.head;
 
         while(temp != null){
             console.log(temp?.data);
@@ -143,7 +143,7 @@ export class SinglyLinkedList {
         }
     }
 
-    public printRecursive(node: Node){
+    public printRecursive(node: Node<T>){
         if(node == null) return;
         this.printRecursive(node.next);
         console.log(node.data);
@@ -152,7 +152,11 @@ export class SinglyLinkedList {
 
 }
 
-let list: SinglyLinkedList = new SinglyLinkedList();
+export class Person {
+    name: string;
+}
+
+let list: SinglyLinkedList<Person> = new SinglyLinkedList();
 list.insertAtEnd({name:"Ali"});
 list.insertAtEnd({name:"John"});
 list.insertAtEnd({name:"Micheal"});

@@ -1,12 +1,12 @@
-export class Node {
-    public data: any;
-    public next: Node | null;
-    public prev: Node | null;
+export class Node<T> {
+    public data: T;
+    public next: Node<T> | null;
+    public prev: Node<T> | null;
 }
 
-export class DoublyLinkedList {
+export class DoublyLinkedList<T> {
 
-    private head: Node | null | undefined = null;
+    private head: Node<T> | null | undefined = null;
 
     constructor(){}
 
@@ -16,8 +16,8 @@ export class DoublyLinkedList {
      * @param data 
      * @returns
      */
-    private createNewNode(data: any) : Node {
-        let newNode: Node = new Node();
+    private createNewNode(data: T) : Node<T> {
+        let newNode: Node<T> = new Node();
         newNode.data = data;
         newNode.next = null;
         newNode.prev = null;
@@ -30,8 +30,8 @@ export class DoublyLinkedList {
      * @param data 
      * @returns 
      */
-    public insertAtBeginning(data: any){
-        let newNode : Node = this.createNewNode(data);
+    public insertAtBeginning(data: T){
+        let newNode : Node<T> = this.createNewNode(data);
 
         if(this.head == null) {
             this.head = newNode;
@@ -50,7 +50,7 @@ export class DoublyLinkedList {
      * @param index index at which node should be inserted in list
      * @returns 
      */
-    public insert(data: any, index: number){
+    public insert(data: T, index: number){
 
         if(index == 0){
             this.insertAtBeginning(data);
@@ -61,14 +61,14 @@ export class DoublyLinkedList {
             return;
         }
 
-        let newNode: Node = this.createNewNode(data);
+        let newNode: Node<T> = this.createNewNode(data);
 
-        let currentNode : Node | null =  this.head;
+        let currentNode : Node<T> | null =  this.head;
         for(let i=0; i<index-1; i++){
             currentNode = currentNode.next;
         }
 
-        let nextNode: Node | null = currentNode.next;
+        let nextNode: Node<T> | null = currentNode.next;
         newNode.next = nextNode;
         newNode.prev = currentNode;
         currentNode.next = newNode;
@@ -85,9 +85,9 @@ export class DoublyLinkedList {
             return;
         }
 
-        let currentNode: Node | null = this.head;
+        let currentNode: Node<T> | null = this.head;
         if(currentNode.next != null){
-            let nextNode: Node | null = currentNode.next;
+            let nextNode: Node<T> | null = currentNode.next;
             nextNode.prev = null;       
         }
 
@@ -104,14 +104,14 @@ export class DoublyLinkedList {
             return;
         }
 
-        let currentNode : Node | null = this.head;
+        let currentNode : Node<T> | null = this.head;
         
         for(let i=0; i < index ; i++){
             currentNode = currentNode.next;
         }
 
-        let previousNode : Node | null = currentNode.prev;
-        let nextNode : Node | null = currentNode.next;
+        let previousNode : Node<T> | null = currentNode.prev;
+        let nextNode : Node<T> | null = currentNode.next;
 
         if(previousNode){
             previousNode.next = nextNode;
@@ -128,7 +128,7 @@ export class DoublyLinkedList {
     /** Prints linked list in forward direction */
     public print(){
 
-        let currentNode: Node | null = this.head;
+        let currentNode: Node<T> | null = this.head;
 
         while(currentNode != null){
             console.log(currentNode.data);
@@ -140,7 +140,7 @@ export class DoublyLinkedList {
      * Prints doubly linked list in reverse direction using prev link references
      */
     public reversePrint(){
-        let currentNode: Node | null = this.head;
+        let currentNode: Node<T> | null = this.head;
 
         /** First we are going to the last node of the list */
         while(currentNode.next != null){
@@ -158,7 +158,8 @@ export class DoublyLinkedList {
 
 }
 
-let list: DoublyLinkedList = new DoublyLinkedList();
+
+let list: DoublyLinkedList<number> = new DoublyLinkedList();
 list.insert(1, 0);
 list.insert(2, 1);
 list.insert(3, 2);

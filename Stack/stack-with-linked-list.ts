@@ -37,3 +37,17 @@ export class Stack<T> implements IStack<T>{
     }
 
 }
+
+export interface Disk {
+    color: string;
+    order: number;
+}
+
+let stack : Stack<Disk> = new Stack();
+
+stack.push({color: "red", order: 0});
+stack.push({color: "yellow", order: 1});
+stack.push({color: "blue", order: 2});
+stack.push({color: "green", order: 3});
+
+console.log(stack.pop());
